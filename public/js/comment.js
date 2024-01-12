@@ -7,16 +7,20 @@ const commentFormHandler = async (event) => {
   
     if (post_id && body) {
       const response = await fetch(`/api/comment`, {
-        method: 'Post',
+        method: 'POST',
         body: JSON.stringify({ post_id, body }),
         headers: {
           'Content-Type': 'application/json',
         },
+
       });
-  
-      if (response.ok) {
-        document.location.replace('/singlepost');
-      } else {
+
+      if (response.redirected) {
+        document.location.assign(response.url)  // this is /login homeroute -force the browser to pick up the change
+      }else if(response.ok){
+        document.location.reload()  
+      }
+       else {
         alert('Failed to create comment');
       }
     }
@@ -25,5 +29,5 @@ const commentFormHandler = async (event) => {
   
   
   document
-    .querySelector('.new-comment-form')
+    .querySelector('#new-comment-form')
     .addEventListener('submit', commentFormHandler);

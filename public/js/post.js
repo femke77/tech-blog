@@ -1,7 +1,6 @@
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-  
   const title = document.querySelector('#title').value.trim();
   const body = document.querySelector('#body').value.trim();
 
@@ -22,9 +21,6 @@ const newFormHandler = async (event) => {
   }
 };
 
-
-
 document
-  .querySelector('.new-post-form')
+  .querySelector('#new-post-form')
   .addEventListener('submit', newFormHandler);
-
